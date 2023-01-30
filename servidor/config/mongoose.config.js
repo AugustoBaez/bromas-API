@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
+mongoose.get("strictQuery", true);
+
 mongoose
-  .connect("mongodb://localhost/jokes", {
+  .connect("mongodb://127.0.0.1:27017/jokes", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

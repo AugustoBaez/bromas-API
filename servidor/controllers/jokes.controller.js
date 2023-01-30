@@ -20,6 +20,17 @@ module.exports.createNewJoke = (req, res) => {
     );
 };
 
+module.exports.findRandom = (req, res) => {
+  Joke.count()
+    .then((count) =>
+      Joke.findOne()
+        .skip(Math.floor(Math.random() * count))
+        .then((randomJoke) => res.json({ jokes: randomJoke }))
+        .catch((error) => catchError(error, res))
+    )
+    .catch((error) => catchError(error, res));
+};
+
 module.exports.updateJoke = (req, res) => {
   Joke.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }).then(
     (updateJoke) =>

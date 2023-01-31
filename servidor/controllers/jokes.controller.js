@@ -25,10 +25,10 @@ module.exports.findRandom = (req, res) => {
     .then((count) =>
       Joke.findOne()
         .skip(Math.floor(Math.random() * count))
-        .then((randomJoke) => res.json({ jokes: randomJoke }))
-        .catch((error) => catchError(error, res))
+        .then((jokeRand) => response.json({ jokes: jokeRand }))
+        .catch((err) => catchError(err, res))
     )
-    .catch((error) => catchError(error, res));
+    .catch((error) => catchError(error, response));
 };
 
 module.exports.updateJoke = (req, res) => {
@@ -44,7 +44,7 @@ module.exports.updateJoke = (req, res) => {
 
 module.exports.deleteJoke = (req, res) => {
   Joke.deleteOne({ _id: req.params.id })
-    .then((result) => res.json({ result: result }))
+    .then((result) => res.json({ result }))
     .catch((error) =>
       res.json({ message: "could not delete joke", error: error })
     );
